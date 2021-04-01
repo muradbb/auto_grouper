@@ -1,6 +1,6 @@
 {
   "name":"Auto Grouper",
-  "description":"asd",
+  "description":"Groups tabs with the same url together",
   "version":"0.1.0",
   "manifest_version":3,
   "icons":{
