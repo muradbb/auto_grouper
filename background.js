@@ -1,7 +1,6 @@
 function urlTrimmer(url) {
     let re = /(?<=\/\/).*?(?=\/)/
-    let matched = re.exec(url)
-    return matched;
+    return re.exec(url)
 }
 
 chrome.tabs.query({
@@ -18,10 +17,7 @@ chrome.tabs.query({
         }
     }
 
-
     groupingMap.forEach((tabsArr, key) => {
-        console.log(tabsArr);
-        console.log(key);
         if (tabsArr.length > 1) {
             let ids = new Array()
             for (var i = 0; i < tabsArr.length; i++) {
