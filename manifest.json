@@ -21,6 +21,37 @@
       "128":"images/img128.png"
     }
   },
+  "commands": {
+   "toggle-feature-group-current-url": {
+     "suggested_key": {
+       "default": "Ctrl+Y",
+       "mac": "Command+Y"
+     },
+     "description": "Toggles grouping the tabs with the current tab's url together"
+   },
+   "toggle-feature-group-all": {
+     "suggested_key": {
+       "default": "Ctrl+Shift+Y",
+       "mac": "Command+Shift+Y"
+     },
+     "description": "Toggles grouping all the tabs with their corresponding urls together"
+   },
+   "_execute_browser_action": {
+     "suggested_key": {
+       "windows": "Ctrl+Shift+Y",
+       "mac": "Command+Shift+Y",
+       "chromeos": "Ctrl+Shift+U",
+       "linux": "Ctrl+Shift+J"
+     }
+   },
+   "_execute_page_action": {
+     "suggested_key": {
+       "default": "Ctrl+Shift+E",
+       "windows": "Alt+Shift+P",
+       "mac": "Alt+Shift+P"
+     }
+   }
+ },
   "permissions":[
     "tabs",
     "windows"
