@@ -2,17 +2,45 @@ function urlTrimmer(url) {
     let re = /(?<=\/\/).*?(?=\/)/
     return re.exec(url)
 }
-console.log("asd");
 
 chrome.commands.onCommand.addListener(function(command) {
-    console.log('Command:', command);
     if (command == "toggle-feature-group-current-url") {
-        console.log(1)
+        groupThisUrl()
     } else if (command == "toggle-feature-group-all") {
-        console.log(2)
         groupAll()
     }
 });
+
+
+function groupThisUrl(){
+  chrome.tabs.query({
+      windowId: chrome.windows.WINDOW_ID_CURRENT
+  }, (tabs) => {
+      var groupingMap = new Map()
+      var currentUrl
+      for (var i = 0; i < tabs.length; i++) {
+        if(tabs[i].active==true){
+          currentUrl=urlTrimmer((tabs[i].url))[0]
+        }
+          if (tabs[i].groupId == -1) {
+              if (!groupingMap.has(urlTrimmer(tabs[i].url)[0])) {
+                  groupingMap.set((urlTrimmer(tabs[i].url)[0]), [tabs[i]])
+              } else {
+                  groupingMap.get((urlTrimmer(tabs[i].url)[0])).push(tabs[i])
+              }
+          }
+      }
+        if(groupingMap.get(currentUrl).length>1){
+          let ids = new Array()
+          for (var i = 0; i < groupingMap.get(currentUrl).length; i++) {
+            ids.push(groupingMap.get(currentUrl)[i].id)
+          }
+          chrome.tabs.group({
+            tabIds: ids
+          })
+      }
+  })
+}
 
 function groupAll() {
     chrome.tabs.query({
